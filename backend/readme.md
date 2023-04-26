@@ -1,0 +1,26 @@
+FlexFood
+
+Cadastro de Usuários
+	Categoria do Usuário
+	-> usuarios *
+Cadastro de Restaurantes
+	Endereço
+	-> restaurantes *
+Cadastro de Produtos
+	-> produtos *
+Login *
+	Token de validação
+	Esqueci senha
+	Login com redes sociais
+Produtos Favoritos
+	-> favoritos_usuarios *
+Carrinhos de Compras
+	-> pedidos *
+Menu de busca de produtos ou restaurantes
+Status do Pedido
+Histórico de Pedidos
+Avaliação de Produtos
+	-> avaliacoes_produtos *
+Estoque dos produtos
+Painel de controle do restaurante
+	
