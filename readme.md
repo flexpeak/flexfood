@@ -76,7 +76,9 @@ Uma vez iniciado o servidor, você deve conseguir acessar a aplicação em ``htt
 Utilize um Client para APIs Rest, como o ***Insomnia***. Tente fazer uma requisição com o seguinte conteúdo:
 
 **Tipo:** POST
+
 **URL:** http://localhost:3000/registrar
+
 **Parâmetros:** 
 ````json
 {
