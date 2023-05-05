@@ -22,7 +22,7 @@ module.exports = class ProdutosController {
             const produto = await produtos.create({
                 nome: req.body.nome,
                 valor: req.body.valor,
-                foto: req.body.foto,
+                foto: '/uploads/' + req.file.filename,
                 restaurante_id: req.restauranteId,
                 descricao: req.body.descricao,
                 quantidade_estoque: req.body.quantidade_estoque
@@ -48,7 +48,7 @@ module.exports = class ProdutosController {
             await produto.update({
                 nome: req.body.nome,
                 valor: req.body.valor,
-                foto: req.body.foto,
+                foto: req.file ? '/uploads/' + req.file.filename : produto.foto,
                 restaurante_id: req.restauranteId,
                 descricao: req.body.descricao,
                 quantidade_estoque: req.body.quantidade_estoque

@@ -6,27 +6,21 @@ import { LoadingButton } from '@mui/lab'
 import api from '../../services/api'
 import { useNavigate } from 'react-router-dom'
 
-const Restaurante = () => {
+const ProdutosForm = () => {
     const [nome, setNome] = useState('')
-    const [logo, setLogo] = useState('')
+    const [foto, setFoto] = useState('')
+    const [valor, setValor] = useState('')
+    const [descricao, setDescricao] = useState('')
+    const [quantidade, setQuantidade] = useState('')
     const [id, setId] = useState('')
     const [loading, setLoading] = useState(false)
     const [sucesso, setSucesso] = useState(false)
     const [error, setError] = useState('')
-    const [logoAtual, setLogoAtual] = useState('')
+    const [fotoAtual, setFotoAtual] = useState('')
     const navigate = useNavigate()
 
-    useEffect(() => {
-        api.get('/restaurantes')
-            .then(({ data }) => {
-                setNome(data.nome)
-                setLogoAtual(process.env.REACT_APP_HOST_API + data.logo)
-                setId(data.id)
-            })
-    }, [])
-
     const fileChange = (files) => {
-        setLogo(files[0])
+        setFoto(files[0])
     }
 
     const handleSubmit = () => {
@@ -34,10 +28,28 @@ const Restaurante = () => {
 
         const formData = new FormData()
         formData.append('nome', nome)
-        formData.append('logo', logo)
+        formData.append('foto', foto)
+        formData.append('valor', valor)
+        formData.append('descricao', descricao)
+        formData.append('quantidade_estoque', quantidade)
 
-        if (id) {
-            api.put('/restaurantes/' + id, formData, {
+        // if (id) {
+        //     api.put('/restaurantes/' + id, formData, {
+        //         headers: {
+        //             'Content-Type': 'multipart/form-data'
+        //         }
+        //     }).then(({ data }) => {
+        //         setSucesso(true)
+        //         setTimeout(() => {
+        //             navigate('/produtos')
+        //         }, 2000)
+        //     }).catch((error) => {
+        //         setError(error.response.data.error)
+        //     }).finally(() => {
+        //         setLoading(false)
+        //     })
+        // } else {
+            api.post('/produtos', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -51,22 +63,7 @@ const Restaurante = () => {
             }).finally(() => {
                 setLoading(false)
             })
-        } else {
-            api.post('/restaurantes', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }).then(({ data }) => {
-                setSucesso(true)
-                setTimeout(() => {
-                    navigate('/produtos')
-                }, 2000)
-            }).catch((error) => {
-                setError(error.response.data.error)
-            }).finally(() => {
-                setLoading(false)
-            })
-        }
+        // }
 
     }
 
@@ -76,7 +73,7 @@ const Restaurante = () => {
             <Box sx={{ my: 3, mx: 3, width: '50%' }}>
                 <Snackbar open={sucesso} autoHideDuration={6000} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
                     <Alert severity="success" sx={{ width: '100%' }}>
-                        Restaurante salvo com sucesso!
+                        Produto salvo com sucesso!
                     </Alert>
                 </Snackbar>
 
@@ -87,8 +84,9 @@ const Restaurante = () => {
                 </Snackbar>
 
                 <TextField label="Nome" variant="outlined" fullWidth sx={{ mb: 2 }} onChange={(e) => { setNome(e.target.value) }} value={nome} />
+                <TextField label="Valor" variant="outlined" fullWidth sx={{ mb: 2 }} onChange={(e) => { setValor(e.target.value) }} value={valor} />
                 <FileUpload
-                    title="Logo do seu restaurante"
+                    title="Foto do seu produto"
                     header="Arraste para esta área"
                     leftLabel="ou"
                     buttonLabel="Clique aqui"
@@ -96,7 +94,9 @@ const Restaurante = () => {
                     showPlaceholderImage={false}
                     onFilesChange={fileChange}
                 />
-                {logoAtual && (<img src={logoAtual} />)}
+                {fotoAtual && (<img src={fotoAtual} />)}
+                <TextField label="Descrição" variant="outlined" fullWidth sx={{ mb: 2 }} onChange={(e) => { setDescricao(e.target.value) }} value={descricao} />
+                <TextField label="Quantidade Em Estoque" variant="outlined" fullWidth sx={{ mb: 2 }} onChange={(e) => { setQuantidade(e.target.value) }} value={quantidade} />
                 <LoadingButton
                     color='primary'
                     variant='contained'
@@ -107,8 +107,7 @@ const Restaurante = () => {
                 >Salvar</LoadingButton>
             </Box>
         </>
-
     )
 }
 
-export default Restaurante
+export default ProdutosForm

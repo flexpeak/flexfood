@@ -12,13 +12,13 @@ const upload = multer({ storage: storage })
 
 router.get('/restaurantes', RestaurantesController.index)
 router.post('/restaurantes', upload.single('logo'), RestaurantesController.store)
-router.put('/restaurantes/:id', RestaurantesController.update)
+router.put('/restaurantes/:id', upload.single('logo'), RestaurantesController.update)
 router.delete('/restaurantes/:id', RestaurantesController.destroy)
 router.get('/restaurantes/:id', RestaurantesController.show)
 
 router.get('/produtos', ProdutosController.index)
-router.post('/produtos', ProdutosController.store)
-router.put('/produtos/:id', ProdutosController.update)
+router.post('/produtos', upload.single('foto'), ProdutosController.store)
+router.put('/produtos/:id', upload.single('foto'), ProdutosController.update)
 router.delete('/produtos/:id', ProdutosController.destroy)
 
 router.get('/produtos-favoritos', ProdutosFavoritosController.index)

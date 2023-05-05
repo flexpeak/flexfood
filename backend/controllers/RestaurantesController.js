@@ -7,7 +7,7 @@ module.exports = class RestaurantesController {
                 const lista = await restaurantes.findAll()
                 res.json(lista)
             } else {
-                const lista = await restaurantes.findAll({
+                const lista = await restaurantes.findOne({
                     where: {
                         usuario_id: req.usuarioId
                     }
@@ -24,7 +24,6 @@ module.exports = class RestaurantesController {
 
     static async store(req, res) {
         try {
-            console.log(req.file)
             const restaurante = await restaurantes.create({
                 nome: req.body.nome,
                 logo: '/uploads/' + req.file.filename,
@@ -52,7 +51,7 @@ module.exports = class RestaurantesController {
 
             await restaurante.update({
                 nome: req.body.nome,
-                logo: req.body.logo,
+                logo: req.file ? '/uploads/' + req.file.filename : restaurante.logo,
                 status: req.body.status,
                 usuario_id: restaurante.usuario_id
             })

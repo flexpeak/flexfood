@@ -6,6 +6,8 @@ import CadastrarFornecedor from './pages/cadastrar-fornecedor/CadastrarFornecedo
 import Dashboard from './pages/dashboard/Dashboard'
 import Home from './pages/home/Home'
 import Restaurante from './pages/restaurante/Restaurante'
+import ProdutosIndex from './pages/produtos/ProdutosIndex'
+import ProdutosForm from './pages/produtos/ProdutosForm'
 
 const Rotas = () => {
   return (
@@ -16,6 +18,9 @@ const Rotas = () => {
         <Route path="/cadastrar-fornecedor" element={<CadastrarFornecedor/>}/>
         <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/restaurante" element={<Restaurante/>}/>
+
+        <Route path="/produtos" element={<ProdutosIndex/>}/>
+        <Route path="/produtos/form" element={<ProdutosForm/>}/>
     </Routes>
   )
 }
