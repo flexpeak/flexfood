@@ -6,8 +6,12 @@ const PedidosController = require('../controllers/PedidosController')
 const PedidosRestauranteController = require('../controllers/PedidosRestauranteController')
 const router = express.Router()
 
+const multer = require('multer')
+const storage = require('../config/storage.js')
+const upload = multer({ storage: storage })
+
 router.get('/restaurantes', RestaurantesController.index)
-router.post('/restaurantes', RestaurantesController.store)
+router.post('/restaurantes', upload.single('logo'), RestaurantesController.store)
 router.put('/restaurantes/:id', RestaurantesController.update)
 router.delete('/restaurantes/:id', RestaurantesController.destroy)
 router.get('/restaurantes/:id', RestaurantesController.show)

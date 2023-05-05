@@ -24,9 +24,10 @@ module.exports = class RestaurantesController {
 
     static async store(req, res) {
         try {
+            console.log(req.file)
             const restaurante = await restaurantes.create({
                 nome: req.body.nome,
-                logo: req.body.logo,
+                logo: '/uploads/' + req.file.filename,
                 status: 'A',
                 usuario_id: req.usuarioId
             })

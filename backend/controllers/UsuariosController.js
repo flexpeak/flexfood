@@ -46,7 +46,8 @@ module.exports = class UsuariosController {
                     const token = await jwt.sign(usuario.id, process.env.JWT_KEY)
 
                     res.json({
-                        token: token
+                        token: token,
+                        tipo: usuario.tipo
                     })
                 } else {
                     res.status(401).json({

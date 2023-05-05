@@ -19,6 +19,7 @@ const Login = () => {
       senha: senha
     }).then(({ data }) => {
       localStorage.setItem('user-token', data.token)
+      localStorage.setItem('user-type', data.tipo)
       navigate('/dashboard')
     }).catch((e) => {
       setError(e.response.data.error)
