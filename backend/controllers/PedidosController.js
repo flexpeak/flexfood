@@ -10,7 +10,8 @@ module.exports = class PedidosController {
             const list = await pedidos.findAll({
                 where: {
                     usuario_id: req.usuarioId
-                }
+                },
+                include: 'restaurante'
             })
 
             res.json(list)
@@ -132,7 +133,12 @@ module.exports = class PedidosController {
                 valor_total: Number(pedido.valor_total) + Number(valorTotal)
             })
 
-            res.json(pedido)
+            const pedido2 = await pedidos.findOne({
+                where: { id: id },
+                include: 'produtos'
+            })
+
+            res.json(pedido2)
         } catch (e) {
             res.status(500).json({
                 error: e.message

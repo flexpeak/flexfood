@@ -26,6 +26,11 @@ module.exports = (sequelize, DataTypes) => {
         as: 'usuario',
         foreignKey: 'usuario_id'
       })
+
+      this.belongsTo(models.restaurantes, {
+        as: 'restaurante',
+        foreignKey: 'restaurante_id'
+      })
     }
 
     static async calculaValorTotal(id) {

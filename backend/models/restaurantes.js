@@ -14,6 +14,11 @@ module.exports = (sequelize, DataTypes) => {
         as: 'produtos',
         foreignKey: 'restaurante_id'
       })
+
+      this.belongsTo(models.usuarios, {
+        as: 'usuario',
+        foreignKey: 'usuario_id'
+      })
     }
   }
   restaurantes.init({

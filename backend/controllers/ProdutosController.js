@@ -38,6 +38,7 @@ module.exports = class ProdutosController {
 
     static async update(req, res) {
         try {
+            const { id } = req.params
             const produto = await produtos.findOne({
                 where: {
                     id: id,
@@ -52,6 +53,23 @@ module.exports = class ProdutosController {
                 restaurante_id: req.restauranteId,
                 descricao: req.body.descricao,
                 quantidade_estoque: req.body.quantidade_estoque
+            })
+
+            res.json(produto)
+        } catch (e) {
+            res.status(500).json({
+                error: e.message
+            })
+        }
+    }
+
+    static async show(req, res) {
+        try {
+            const { id } = req.params
+            const produto = await produtos.findOne({
+                where: {
+                    id: id
+                }
             })
 
             res.json(produto)

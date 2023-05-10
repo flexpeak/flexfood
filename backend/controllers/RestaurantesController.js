@@ -1,10 +1,16 @@
-const { restaurantes } = require('../models')
+const { restaurantes, usuarios } = require('../models')
 
 module.exports = class RestaurantesController {
     static async index(req, res) {
         try {
             if (req.usuarioTipo == 'C') {
-                const lista = await restaurantes.findAll()
+                const lista = await restaurantes.findAll({
+                    include: {
+                        model: usuarios,
+                        as: 'usuario',
+                        attributes: ['nome']
+                    }
+                })
                 res.json(lista)
             } else {
                 const lista = await restaurantes.findOne({
@@ -14,7 +20,7 @@ module.exports = class RestaurantesController {
                 })
                 res.json(lista)
             }
-            
+
         } catch (e) {
             res.status(500).json({
                 error: e.message

@@ -24,11 +24,14 @@ const ProdutosIndex = () => {
                 <Button onClick={() => { navigate('/produtos/form') }} variant='contained'>
                     Novo Registro
                 </Button>
-                {
-                    produtos.map((produto) => (
-                        <Produto produto={produto}/>
-                    ))
-                }
+                <Box sx={{ display: 'flex' }}>
+                    {
+                        produtos.map((produto) => (
+                            <Produto produto={produto} />
+                        ))
+                    }
+                </Box>
+
 
             </Box>
 

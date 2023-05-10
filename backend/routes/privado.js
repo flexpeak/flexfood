@@ -17,6 +17,7 @@ router.delete('/restaurantes/:id', RestaurantesController.destroy)
 router.get('/restaurantes/:id', RestaurantesController.show)
 
 router.get('/produtos', ProdutosController.index)
+router.get('/produtos/:id', ProdutosController.show)
 router.post('/produtos', upload.single('foto'), ProdutosController.store)
 router.put('/produtos/:id', upload.single('foto'), ProdutosController.update)
 router.delete('/produtos/:id', ProdutosController.destroy)

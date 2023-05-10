@@ -4,7 +4,7 @@ import { Alert, Box, Snackbar, TextField } from '@mui/material'
 import FileUpload from 'react-mui-fileuploader'
 import { LoadingButton } from '@mui/lab'
 import api from '../../services/api'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const ProdutosForm = () => {
     const [nome, setNome] = useState('')
@@ -12,7 +12,7 @@ const ProdutosForm = () => {
     const [valor, setValor] = useState('')
     const [descricao, setDescricao] = useState('')
     const [quantidade, setQuantidade] = useState('')
-    const [id, setId] = useState('')
+    const { id } = useParams()
     const [loading, setLoading] = useState(false)
     const [sucesso, setSucesso] = useState(false)
     const [error, setError] = useState('')
@@ -22,6 +22,18 @@ const ProdutosForm = () => {
     const fileChange = (files) => {
         setFoto(files[0])
     }
+
+    useEffect(() => {
+        if (id) {
+            api.get('/produtos/' + id).then(({data}) => {
+                setNome(data.nome)
+                setFotoAtual(process.env.REACT_APP_HOST_API + data.foto)
+                setValor(data.valor)
+                setDescricao(data.descricao)
+                setQuantidade(data.quantidade_estoque)
+            })
+        }
+    }, [])
 
     const handleSubmit = () => {
         setLoading(true)
@@ -33,22 +45,22 @@ const ProdutosForm = () => {
         formData.append('descricao', descricao)
         formData.append('quantidade_estoque', quantidade)
 
-        // if (id) {
-        //     api.put('/restaurantes/' + id, formData, {
-        //         headers: {
-        //             'Content-Type': 'multipart/form-data'
-        //         }
-        //     }).then(({ data }) => {
-        //         setSucesso(true)
-        //         setTimeout(() => {
-        //             navigate('/produtos')
-        //         }, 2000)
-        //     }).catch((error) => {
-        //         setError(error.response.data.error)
-        //     }).finally(() => {
-        //         setLoading(false)
-        //     })
-        // } else {
+        if (id) {
+            api.put('/produtos/' + id, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(({ data }) => {
+                setSucesso(true)
+                setTimeout(() => {
+                    navigate('/produtos')
+                }, 2000)
+            }).catch((error) => {
+                setError(error.response.data.error)
+            }).finally(() => {
+                setLoading(false)
+            })
+        } else {
             api.post('/produtos', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -63,7 +75,7 @@ const ProdutosForm = () => {
             }).finally(() => {
                 setLoading(false)
             })
-        // }
+        }
 
     }
 
@@ -94,7 +106,7 @@ const ProdutosForm = () => {
                     showPlaceholderImage={false}
                     onFilesChange={fileChange}
                 />
-                {fotoAtual && (<img src={fotoAtual} />)}
+                {fotoAtual && (<img src={fotoAtual} style={{ width: '100%'}} />)}
                 <TextField label="Descrição" variant="outlined" fullWidth sx={{ mb: 2 }} onChange={(e) => { setDescricao(e.target.value) }} value={descricao} />
                 <TextField label="Quantidade Em Estoque" variant="outlined" fullWidth sx={{ mb: 2 }} onChange={(e) => { setQuantidade(e.target.value) }} value={quantidade} />
                 <LoadingButton

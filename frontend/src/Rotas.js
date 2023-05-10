@@ -8,6 +8,9 @@ import Home from './pages/home/Home'
 import Restaurante from './pages/restaurante/Restaurante'
 import ProdutosIndex from './pages/produtos/ProdutosIndex'
 import ProdutosForm from './pages/produtos/ProdutosForm'
+import FazerPedido from './pages/fazer-pedido/FazerPedido'
+import RestauranteProdutos from './pages/restaurante-produtos/RestauranteProdutos'
+import MeusPedidos from './pages/meus-pedidos/MeusPedidos'
 
 const Rotas = () => {
   return (
@@ -21,6 +24,11 @@ const Rotas = () => {
 
         <Route path="/produtos" element={<ProdutosIndex/>}/>
         <Route path="/produtos/form" element={<ProdutosForm/>}/>
+        <Route path="/produtos/form/:id" element={<ProdutosForm/>}/>
+
+        <Route path="/fazer-pedido" element= {<FazerPedido/>} />
+        <Route path="/restaurante-produtos/:id" element={<RestauranteProdutos/>}/>
+        <Route path="/meus-pedidos" element={<MeusPedidos/>} />
     </Routes>
   )
 }

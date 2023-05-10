@@ -4,11 +4,14 @@ import './index.css';
 import { Button } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
 import Rotas from './Rotas';
+import { CarrinhoProvider } from './context/CarrinhoContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <BrowserRouter>
-    <Rotas/>
-  </BrowserRouter>
+  <CarrinhoProvider>
+    <BrowserRouter>
+      <Rotas/>
+    </BrowserRouter>
+  </CarrinhoProvider>
 )
