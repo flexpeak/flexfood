@@ -11,6 +11,7 @@ import ProdutosForm from './pages/produtos/ProdutosForm'
 import FazerPedido from './pages/fazer-pedido/FazerPedido'
 import RestauranteProdutos from './pages/restaurante-produtos/RestauranteProdutos'
 import MeusPedidos from './pages/meus-pedidos/MeusPedidos'
+import Pedidos from './pages/pedidos/Pedidos'
 
 const Rotas = () => {
   return (
@@ -29,6 +30,7 @@ const Rotas = () => {
         <Route path="/fazer-pedido" element= {<FazerPedido/>} />
         <Route path="/restaurante-produtos/:id" element={<RestauranteProdutos/>}/>
         <Route path="/meus-pedidos" element={<MeusPedidos/>} />
+        <Route path="/pedidos" element={<Pedidos/>} />
     </Routes>
   )
 }

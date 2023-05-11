@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import api from '../../services/api'
 import Navegacao from '../../components/Navegacao'
 import { Box, Chip, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import Statuses from '../../components/Statuses'
 
 const MeusPedidos = () => {
     const [pedidos, setPedidos] = useState([])
@@ -31,7 +32,7 @@ const MeusPedidos = () => {
                                     <TableRow>
                                         <TableCell>{ pedido.restaurante.nome }</TableCell>
                                         <TableCell>
-                                            <Chip label={ pedido.status == 'P' ? 'Pendente' : 'Outra Coisa' } color="primary" />
+                                            <Statuses status={pedido.status}/>
                                         </TableCell>
                                         <TableCell>R$ { pedido.valor_total }</TableCell>
                                     </TableRow>

@@ -8,7 +8,7 @@ module.exports = class PedidosRestauranteController {
                 where: {
                     restaurante_id: req.restauranteId,
                     status: {
-                        [Op.notIn]: ['P', 'C']
+                        [Op.notIn]: ['C']
                     }
                 },
                 include: [{
