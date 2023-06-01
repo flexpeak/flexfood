@@ -64,7 +64,7 @@ DB_DATABASE=flexfood
 DB_HOST=127.0.0.1
 JWT_KEY='jwtk3y'
 ````
-
+   
 3. Criar o banco de dados
 ````
 sequelize db:create
