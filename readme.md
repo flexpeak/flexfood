@@ -69,7 +69,7 @@ JWT_KEY='jwtk3y'
 ````
 sequelize db:create
 ````
-            
+                
 ### Inicializar o servidor
 ````sh
 cd backend # entrando na pasta do backend
